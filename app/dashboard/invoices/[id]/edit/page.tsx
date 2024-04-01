@@ -1,9 +1,15 @@
+'use server';
+
 import Form from '@/app/ui/invoices/edit-form';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
+import { unstable_noStore } from 'next/cache';
 
 export default async function Page({ params }: { params: { id: string } }) {
+  // Note: Added to prevent cache bugs compared to DB when editing an Invoice.
+  unstable_noStore();
+
   const id = params.id;
   const [invoice, customers] = await Promise.all([
     fetchInvoiceById(id),
