@@ -5,6 +5,11 @@ import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
 import { unstable_noStore } from 'next/cache';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edit Invoice',
+};
 
 export default async function Page({ params }: { params: { id: string } }) {
   // Note: Added to prevent cache bugs compared to DB when editing an Invoice.
